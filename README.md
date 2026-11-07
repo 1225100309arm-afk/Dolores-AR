@@ -1,48 +1,11 @@
-# 🔔 Rally de la Independencia AR — Dolores Hidalgo
+#  Rally de la Independencia AR — Dolores Hidalgo
 
 Juego de **realidad aumentada por ubicación** hecho en Flutter con **TDD** (Desarrollo Guiado por Pruebas).
 El jugador recorre Dolores Hidalgo buscando a 6 personajes de la Independencia con un **radar**, un indicador de **"frío o caliente"** y la **cámara**. Al acercarse a 15 m o menos, responde una **pregunta de historia** para atraparlo y guardarlo en su **álbum**.
 
-- **Materia:** Desarrollo Móvil Integral · UTNG
-- **Profesor:** Anastacio Rodríguez García
-- **Alumna:** Yaneli Sánchez Cárdenas · Grupo GTID244
 
----
 
-## 📋 ¿Qué se hizo? (resumen por ronda)
-
-| Ronda | Qué se construyó | Archivo(s) |
-|---|---|---|
-| 0 | Proyecto, paquetes (`camera`, `geolocator`, `flutter_compass`, `shared_preferences`) y permisos de Android | `pubspec.yaml`, `AndroidManifest.xml` |
-| 1 | Mini documento de diseño: reglas del juego (15 m, 2 intentos, 100/50 puntos, 60–500 m) | — |
-| 2 | Matemáticas GPS: distancia (Haversine), rumbo, ángulos y la función NUEVA `destino` | `geo.dart` |
-| 3 | Modelo de datos y catálogo de 6 personajes con su pregunta | `personaje.dart`, `catalogo.dart` |
-| 4 | Esconder personajes al azar con `Random` inyectado y raíz cuadrada (reparto parejo) | `aparicion.dart` |
-| 5 | Radar (polares → cartesianas) y "frío o caliente" | `radar.dart` |
-| 6 | Motor de RA: qué personajes ve la cámara y en qué parte de la pantalla | `motor_ar.dart` |
-| 7 | Reglas del juego con `sealed class` (Capturado / Fallo / SeEscapo) | `partida.dart`, `excepciones.dart` |
-| 8 | Guardar el progreso (álbum) con un contrato y dos implementaciones | `almacen.dart`, `almacen_prefs.dart` |
-| 9 | Fuentes de GPS y brújula: reales y simuladas (modo demo para "caminar" con botones) | `fuentes*.dart` |
-| 10 | ViewModel que une todo | `rally_viewmodel.dart` |
-| 11 | Pantallas: cámara, radar con `CustomPainter`, juego, álbum e inicio | `presentacion/` |
-| 12 | Playtesting, seguridad física y privacidad | — |
-
-### Ciclo TDD usado
-🔴 **ROJO:** escribir la prueba primero (falla) → 🟢 **VERDE:** código mínimo para que pase → 🔵 **REFACTOR:** ordenar sin romper nada.
-
-### Estructura
-```
-lib/
-  dominio/       <- reglas del juego (Dart puro, sin Flutter)
-  datos/         <- GPS, brújula, simuladores y almacenamiento
-  presentacion/  <- ViewModel y pantallas
-  main.dart
-test/            <- 43 pruebas (geo, aparición, radar, motor AR, partida, viewmodel)
-```
-
----
-
-## ▶️ Cómo ejecutarlo
+##  Cómo ejecutarlo
 
 ```bash
 flutter pub get
@@ -50,11 +13,9 @@ flutter test        # deben pasar todas las pruebas
 flutter run         # con el emulador abierto
 ```
 
-En el emulador usa el botón **"Modo demo (salón de clases)"**: no necesita GPS ni brújula.
 
----
 
-## 📸 Evidencias
+##  Evidencias
 
 ### Código
 
@@ -110,23 +71,18 @@ En el emulador usa el botón **"Modo demo (salón de clases)"**: no necesita GPS
 
 ### App en el emulador
 
-**E1 · Pantalla de inicio con aviso de seguridad y los 3 modos**
+![E4](capturas/E4_album.png)
+
 ![E1](capturas/E1_inicio.png)
 
-**E2 · Modo demo (salón de clases): radar, personajes flotando con su distancia y botones para caminar**
+
 ![E2](capturas/E2_demo_radar.png)
 
-**E3 · Modo GPS real en el emulador: como no hay brújula ni GPS real, la app muestra un mensaje amable y no se cierra**
+
 ![E3](capturas/E3_gps_real.png)
 
-**E4 · Mi álbum: los 6 personajes por descubrir y el mejor puntaje**
-![E4](capturas/E4_album.png)
+
+
 
 ---
 
-## 🔒 Privacidad y seguridad
-- La ubicación nunca sale del teléfono; el progreso guardado solo tiene ids de personajes y el puntaje.
-- Se pide ubicación solo "mientras se usa la app".
-- La pantalla de inicio muestra un aviso para cuidar el paso y no cruzar la calle viendo el teléfono.
-
-> ⚠️ Los datos históricos y las coordenadas son de práctica; deben verificarse con fuentes locales.
