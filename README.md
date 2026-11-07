@@ -79,7 +79,7 @@ flutter run         # con el emulador abierto
 ![E2](capturas/E2_demo_radar.png)
 
 
-![E3](capturas/E3_gps_real.png)
+
 
 
 
